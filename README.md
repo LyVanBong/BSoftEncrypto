@@ -1,2 +1,2 @@
-# MyGraduationProject
-My Graduation Project 2019
+# My Graduation Project
+
