@@ -1,0 +1,238 @@
+﻿<Window
+    x:Class="WpfApp1.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:WpfApp1"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Width="900"
+    Height="600"
+    MinWidth="900"
+    MinHeight="600"
+    mc:Ignorable="d"
+    AllowsTransparency="True"
+    ResizeMode="NoResize"
+    Title="BSoftCryptor"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None">
+
+    <Grid Loaded="Grid_Loaded">
+        <Grid.Effect>
+            <DropShadowEffect
+                BlurRadius="100"
+                Direction="200"
+                Opacity="0.5" />
+        </Grid.Effect>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="170" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition x:Name="menus" Width="220" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <!--logo and button-->
+        <Border
+            x:Name="brdSagust"
+            Grid.Row="0"
+            Grid.Column="0"
+            Background="#163E88"
+            MouseDown="BrdSagust_MouseDown">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0">
+                    <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Image Source="Images/Icon/icon.png" />
+                        <Label
+                            x:Name="lbLogo1"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Content="BSOFTCRYPTOR"
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Foreground="#FFF9F9F9" />
+                    </DockPanel>
+                </Border>
+                <Border Grid.Row="1">
+                    <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Image x:Name="imgLogo2" MouseDown="ImgLogo2_MouseDown">
+                            <Image.Style>
+                                <Style TargetType="Image">
+                                    <Setter Property="Source" Value="Images/Icon/logo.png" />
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="true">
+                                            <Setter Property="Source" Value="Images/Icon/logo2.png" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                        <!--<Label Content="User: Administrator"/>-->
+                    </DockPanel>
+                </Border>
+            </Grid>
+        </Border>
+        <!--header and button-->
+        <Border
+            Grid.Row="0"
+            Grid.Column="1"
+            Background="#163E88"
+            MouseDown="BrdSagust_MouseDown">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0" Background="White">
+                    <StackPanel
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Orientation="Horizontal">
+                        <Button
+                            x:Name="btnMinsize"
+                            Click="BtnMinsize_Click"
+                            Content=""
+                            FontFamily="Segoe MDL2 Assets"
+                            Style="{DynamicResource minibutonlar}" />
+                        <Button
+                            x:Name="btnMinMaxSize"
+                            Click="BtnMinMaxSize_Click"
+                            Content=""
+                            FontFamily="Segoe MDL2 Assets"
+                            Style="{DynamicResource minmaxsize}" />
+                        <Button
+                            x:Name="btnClose"
+                            Click="BtnClose_Click"
+                            Content=""
+                            FontFamily="Segoe MDL2 Assets"
+                            Style="{DynamicResource minibutonlar}" />
+                    </StackPanel>
+                </Border>
+                <Border Grid.Row="1">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Border>
+        <!--Control and button-->
+        <Border
+            Grid.Row="1"
+            Grid.Column="0"
+            Background="#163E88">
+            <StackPanel HorizontalAlignment="Left">
+                <!--symmetric algorithm-->
+                <Button
+                    x:Name="symmetric"
+                    Click="Symmetric_Click"
+                    Padding="0 0 0 10"
+                    Style="{DynamicResource styleControls}">
+                    <DockPanel Width="210" Margin="10 0 0 0">
+                        <Image Width="32" Source="Images/Icon/secret.png" />
+                        <Label
+                            x:Name="lb_secret"
+                            Content="Secret Key Encryption"
+                            FontSize="16"
+                            Foreground="White" />
+                    </DockPanel>
+                </Button>
+                <!--asymmetric algorithm-->
+                <Button
+                    x:Name="asymmetric"
+                    Click="Asymmetric_Click"
+                    Style="{DynamicResource styleControls}">
+                    <DockPanel Width="200" Margin="10 0 0 0">
+                        <Image Width="32" Source="Images/key_32px.png" />
+                        <Label
+                            x:Name="lb_public"
+                            Content="Public Key Encryption"
+                            FontSize="16"
+                            Foreground="White" />
+                    </DockPanel>
+                </Button>
+                <!--hash algorithm-->
+                <Button
+                    x:Name="hashFunc"
+                    Click="HashFunc_Click"
+                    Style="{DynamicResource styleControls}">
+                    <DockPanel Width="200" Margin="10 0 0 0">
+                        <Image Width="32" Source="Images/Icon/hash.png" />
+                        <Label
+                            x:Name="lb_hash"
+                            Content="Hash Functions"
+                            FontSize="16"
+                            Foreground="White" />
+                    </DockPanel>
+                </Button>
+                <!--<Button Padding="0 0 0 10" Style="{DynamicResource styleControls}">
+                    <DockPanel Width="220" Margin="10 0 0 0">
+                        <Image Width="32" Source="Images/Icon/random.png" />
+                        <Label
+                            Content="Random Generation"
+                            FontSize="16"
+                            Foreground="White" />
+                    </DockPanel>
+                </Button>-->
+                <!--setting-->
+                <Button Style="{DynamicResource styleControls}">
+                    <DockPanel Width="200" Margin="10 0 0 0">
+                        <Image Width="32" Source="Images/Icon/setting.png" />
+                        <Label
+                            x:Name="lb_setting"
+                            Content="Setting"
+                            FontSize="16"
+                            Foreground="White" />
+                    </DockPanel>
+                </Button>
+                <!--about-->
+                <Button Style="{DynamicResource styleControls}">
+                    <DockPanel Width="200" Margin="10 0 0 0">
+                        <Image Width="32" Source="Images/Icon/about_32px.png" />
+                        <Label
+                            x:Name="lb_about"
+                            Content="About"
+                            FontSize="16"
+                            Foreground="White" />
+                    </DockPanel>
+                </Button>
+                <!--<Canvas>
+                    <Border
+                        Canvas.Left="70"
+                        Canvas.Top="190"
+                        CornerRadius="10 10 10 10">
+                        <Label
+                            Width="77"
+                            VerticalAlignment="Center"
+                            HorizontalContentAlignment="Center"
+                            Content="10.0.0.10"
+                            Foreground="White" />
+                        <Border.Style>
+                            <Style TargetType="Border">
+                                <Setter Property="Background" Value="#FF233D78"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#FF4372C7"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                    </Border>
+                </Canvas>-->
+            </StackPanel>
+        </Border>
+        <!--Content and button-->
+        <Border Grid.Row="1" Grid.Column="1">
+            <Border.Background>
+                <SolidColorBrush Color="#FFF3F3F3" />
+            </Border.Background>
+            <Grid x:Name="content_bcryptor" />
+        </Border>
+    </Grid>
+
+</Window>

@@ -1,0 +1,127 @@
+﻿<Application
+    x:Class="WpfApp1.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:WpfApp1"
+    StartupUri="MainWindow.xaml">
+
+    <Application.Resources>
+        <Style x:Key="minibutonlar" TargetType="Button">
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="Width" Value="35" />
+            <Setter Property="Height" Value="35" />
+            <Setter Property="FontSize" Value="10" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <!--<Setter Property="Content" Value="X"/>-->
+            <Setter Property="Background" Value="White" />
+            <Setter Property="BorderThickness" Value="0 0 0 0" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border
+                            Background="White"
+                            BorderBrush="#163E88"
+                            BorderThickness="0 0 0 0"
+                            Name="boder">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter TargetName="boder" Property="BorderBrush" Value="White" />
+                                <Setter TargetName="boder" Property="Background" Value="#163E88" />
+                                <Setter Property="Foreground" Value="White" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="styleControls" TargetType="Button">
+            <Setter Property="Foreground" Value="#163E88" />
+            <Setter Property="Margin" Value=" 0 0 0 2" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border
+                            Background="{x:Null}"
+                            BorderBrush="{x:Null}"
+                            BorderThickness="5 0 0 0"
+                            Name="boder">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter TargetName="boder" Property="BorderBrush" Value="#3A5C9A" />
+                                <Setter TargetName="boder" Property="Background" Value="#3A5C9A" />
+                                <Setter TargetName="boder" Property="BorderThickness" Value="5 0 0 0" />
+                                <Setter Property="Foreground" Value="White" />
+                            </Trigger>
+                            <!--#163E88 color background-->
+                            <Trigger Property="IsFocused" Value="true">
+                                <Setter TargetName="boder" Property="BorderBrush" Value="white" />
+                                <Setter TargetName="boder" Property="Background" Value="#3A5C9A" />
+                                <Setter TargetName="boder" Property="BorderThickness" Value="5 0 0 0" />
+                                <Setter Property="Foreground" Value="White" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="minmaxsize" TargetType="Button">
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="Width" Value="35" />
+            <Setter Property="Height" Value="35" />
+            <Setter Property="FontSize" Value="10" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <!--<Setter Property="Content" Value="X"/>-->
+            <Setter Property="Background" Value="White" />
+            <Setter Property="BorderThickness" Value="0 0 0 0" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border
+                            Background="White"
+                            BorderBrush="#163E88"
+                            BorderThickness="0 0 0 0"
+                            Name="boder">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter TargetName="boder" Property="BorderBrush" Value="White" />
+                                <Setter TargetName="boder" Property="Background" Value="#163E88" />
+                                <Setter Property="Foreground" Value="White" />
+                                <!--<Setter Property="Content" Value=""/>
+                                <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>-->
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="btnControlHash" TargetType="Button">
+            <Setter Property="Background" Value="white" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#163E88" />
+                    <Setter Property="Foreground" Value="#163E88"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="btnControlSymmetric" TargetType="Button">
+            <Setter Property="Background" Value="white" />
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#163E88" />
+                    <Setter Property="Foreground" Value="#163E88"/>
+                    <Setter Property="Content" Value="RUN"/>
+                    
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Application.Resources>
+
+</Application>

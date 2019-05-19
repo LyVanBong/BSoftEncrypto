@@ -1,0 +1,272 @@
+﻿<UserControl
+    x:Class="WpfApp1.UserControl.UcHashFunction"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:WpfApp1.UserControl"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    MinWidth="680"
+    MinHeight="430"
+    mc:Ignorable="d"
+    Background="White"
+    d:DesignHeight="430"
+    d:DesignWidth="680"
+    Foreground="Black">
+
+    <Grid>
+        <GroupBox
+            Margin="10 0 10 10"
+            BorderBrush="#FF4A4E61"
+            BorderThickness="2"
+            FontSize="16"
+            FontWeight="Bold"
+            Foreground="Black">
+            <GroupBox.Header>GENERATE HASH</GroupBox.Header>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5*" />
+                    <RowDefinition Height="3*" />
+                </Grid.RowDefinitions>
+                <!--generate hash code-->
+                <Border Grid.Row="0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <!--open file-->
+                        <Border Grid.Row="0">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1.5*" />
+                                    <ColumnDefinition Width="0.5*" />
+                                    <ColumnDefinition Width="8*" />
+                                    <ColumnDefinition Width="1.5*" />
+                                </Grid.ColumnDefinitions>
+                                <Label
+                                    Grid.Column="0"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    VerticalContentAlignment="Center"
+                                    Content="FILE" />
+                                <CheckBox
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    VerticalContentAlignment="Center"
+                                    Visibility="Hidden" />
+                                <TextBox
+                                    Name="txtPathNameFile"
+                                    Grid.Column="2"
+                                    VerticalAlignment="Center"
+                                    IsReadOnly="True" FontWeight="Normal" />
+                                <Button
+                                    Grid.Column="3"
+                                    Margin="5"
+                                    VerticalAlignment="Center"
+                                    VerticalContentAlignment="Center"
+                                    Content="CHOOSE"
+                                    Name="btnOpenFile"
+                                    Click="BtnOpenFile_Click"
+                                    Style="{DynamicResource btnControlHash}" />
+                            </Grid>
+                        </Border>
+                        <!--hash function-->
+                        <Border Grid.Row="1">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1.5*" />
+                                    <ColumnDefinition Width="0.5*" />
+                                    <ColumnDefinition Width="8*" />
+                                    <ColumnDefinition Width="1.5*" />
+                                </Grid.ColumnDefinitions>
+                                <Label
+                                    Grid.Column="0"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    VerticalContentAlignment="Center"
+                                    Content="MD5" />
+
+                                <TextBox
+                                    Name="txtMd5"
+                                    Grid.Column="2"
+                                    VerticalAlignment="Center"
+                                    IsReadOnly="True" FontWeight="Normal" />
+                                <Button
+                                    Name="md5Copy"
+                                    Click="Md5Copy_Click"
+                                    Grid.Column="3"
+                                    Margin="5"
+                                    VerticalAlignment="Center"
+                                    VerticalContentAlignment="Center"
+                                    Content="COPY"
+                                    Style="{DynamicResource btnControlHash}" />
+                            </Grid>
+                        </Border>
+                        <!--sha1-->
+                        <Border Grid.Row="2">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1.5*" />
+                                    <ColumnDefinition Width="0.5*" />
+                                    <ColumnDefinition Width="8*" />
+                                    <ColumnDefinition Width="1.5*" />
+                                </Grid.ColumnDefinitions>
+                                <Label
+                                    Grid.Column="0"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    VerticalContentAlignment="Center"
+                                    Content="SHA-1" />
+
+                                <TextBox
+                                    Name="txtSha1"
+                                    Grid.Column="2"
+                                    VerticalAlignment="Center"
+                                    IsReadOnly="True" FontWeight="Normal" />
+                                <Button
+                                    Name="sha1Copy"
+                                    Click="Sha1Copy_Click"
+                                    Grid.Column="3"
+                                    Margin="5"
+                                    VerticalAlignment="Center"
+                                    VerticalContentAlignment="Center"
+                                    Content="COPY"
+                                    Style="{DynamicResource btnControlHash}" />
+                            </Grid>
+                        </Border>
+                        <!--sha256-->
+                        <Border Grid.Row="3">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1.5*" />
+                                    <ColumnDefinition Width="0.5*" />
+                                    <ColumnDefinition Width="8*" />
+                                    <ColumnDefinition Width="1.5*" />
+                                </Grid.ColumnDefinitions>
+                                <Label
+                                    Grid.Column="0"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    VerticalContentAlignment="Center"
+                                    Content="SHA-256" />
+
+                                <TextBox
+                                    Name="txtSha256"
+                                    Grid.Column="2"
+                                    VerticalAlignment="Center"
+                                    IsReadOnly="True" FontWeight="Normal" />
+                                <Button
+                                    Name="sha526Copy"
+                                    Click="Sha526Copy_Click"
+                                    Grid.Column="3"
+                                    Margin="5"
+                                    VerticalAlignment="Center"
+                                    VerticalContentAlignment="Center"
+                                    Content="COPY"
+                                    Style="{DynamicResource btnControlHash}" />
+                            </Grid>
+                        </Border>
+                        <!--sha 512-->
+                        <Border Grid.Row="4">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1.5*" />
+                                    <ColumnDefinition Width="0.5*" />
+                                    <ColumnDefinition Width="8*" />
+                                    <ColumnDefinition Width="1.5*" />
+                                </Grid.ColumnDefinitions>
+                                <Label
+                                    Grid.Column="0"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    VerticalContentAlignment="Center"
+                                    Content="SHA-512" />
+
+                                <TextBox
+                                    Name="txtSha512"
+                                    Grid.Column="2"
+                                    VerticalAlignment="Center"
+                                    IsReadOnly="True" FontWeight="Normal" />
+                                <Button
+                                    Name="sha512Copy"
+                                    Click="Sha512Copy_Click"
+                                    Grid.Column="3"
+                                    Margin="5"
+                                    VerticalAlignment="Center"
+                                    VerticalContentAlignment="Center"
+                                    Content="COPY"
+                                    Style="{DynamicResource btnControlHash}" />
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </Border>
+                <!--verify hash code-->
+                <Border Grid.Row="1">
+                    <GroupBox BorderBrush="Gray" Margin="5 0 5 5" BorderThickness="1">
+                        <GroupBox.Header>
+                            VERIFY HASH
+                        </GroupBox.Header>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Border Grid.Row="0">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1.5*" />
+                                        <ColumnDefinition Width="0.5*" />
+                                        <ColumnDefinition Width="8*" />
+                                        <ColumnDefinition Width="1.5*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label
+                                    Grid.Column="2"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Content="VERIFY HASH WITH GENERATED HASH" />
+                                </Grid>
+                            </Border>
+                            <Border Grid.Row="1">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1.5*" />
+                                        <ColumnDefinition Width="0.5*" />
+                                        <ColumnDefinition Width="8*" />
+                                        <ColumnDefinition Width="1.5*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label
+                                    Grid.Column="0"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    VerticalContentAlignment="Center"
+                                    Content="HASH" />
+
+                                    <TextBox
+                                    Grid.Column="2"
+                                        Name="txtVerifyHash"
+                                    VerticalAlignment="Center"
+                                    IsReadOnly="False" FontWeight="Normal" />
+                                    <Button
+                                        Name="btnVeryfy"
+                                        Click="BtnVeryfy_Click"
+                                    Grid.Column="3"
+                                    Margin="5"
+                                    VerticalAlignment="Center"
+                                    VerticalContentAlignment="Center"
+                                    Content="VERIFY"
+                                    Style="{DynamicResource btnControlHash}" />
+                                </Grid>
+                            </Border>
+                        </Grid>
+                    </GroupBox>
+                </Border>
+            </Grid>
+        </GroupBox>
+    </Grid>
+
+</UserControl>
