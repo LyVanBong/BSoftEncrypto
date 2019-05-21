@@ -28,6 +28,7 @@ namespace BSoftEncryptor.ViewModels
             string fileName = fileInfo.Name;
             fileName = fileName.Replace(extentions, "");
 
+            //key and iv
             byte[] keys = GetKeys(symmetricAlgorithms[i].Key.Length);
             byte[] ivs = GetIVs(symmetricAlgorithms[i].IV.Length);
 
@@ -62,11 +63,12 @@ namespace BSoftEncryptor.ViewModels
             string fileName = fileInfo.Name;
             fileName = fileName.Replace(extentions, "");
 
+            //key and iv
             byte[] keys = GetKeys(symmetricAlgorithms[i].Key.Length);
             byte[] ivs = GetIVs(symmetricAlgorithms[i].IV.Length);
 
             //Tạo một bộ mã hóa để thực hiện chuyển đổi luồng.
-            ICryptoTransform transform = symmetricAlgorithms[i].CreateEncryptor(keys, ivs);
+            ICryptoTransform transform = symmetricAlgorithms[i].CreateDecryptor(keys, ivs);
 
             //tao luồng để giải mã
             using (MemoryStream memory = new MemoryStream(GetByteFile()))
