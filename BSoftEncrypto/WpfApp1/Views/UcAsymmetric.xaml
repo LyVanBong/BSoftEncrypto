@@ -12,14 +12,6 @@
     d:DesignWidth="680">
 
     <Grid Background="White">
-        <!--<TextBox
-            x:Name="txbSource"
-            VerticalAlignment="Top"
-            Text="{Binding ButtonName}" />
-        <TextBox
-            x:Name="txbBinding"
-            VerticalAlignment="Center"
-            Text="{Binding Path=Text, ElementName=txbSource}" />-->
         <GroupBox
             Margin="10 0 10 10"
             BorderBrush="Gray"
