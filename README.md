@@ -1,5 +1,5 @@
 # My Graduation Project
-## __ĐỀ TÀI:__ *TÌM HIỂU SỰ HỖ TRỢ MẬT MÃ TRONG .NET FRAMEWORK VÀ ỨNG DỤNG*
+## ĐỀ TÀI : *TÌM HIỂU SỰ HỖ TRỢ MẬT MÃ TRONG .NET FRAMEWORK VÀ ỨNG DỤNG*
 
 ### Người hướng dẫn:
 ```
