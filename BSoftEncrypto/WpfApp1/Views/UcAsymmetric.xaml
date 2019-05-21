@@ -62,13 +62,13 @@
                 </Grid>
                 <!--group box function-->
                 <GroupBox
-                    Margin="10"
                     Grid.Row="1"
+                    Margin="10"
                     BorderBrush="Gray"
                     BorderThickness="1"
+                    Header="FEATURES"
                     IsEnabled="False"
-                    Name="gbFeatures"
-                    Header="FEATURES">
+                    Name="gbFeatures">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
@@ -79,8 +79,8 @@
                             HorizontalAlignment="Center"
                             VerticalContentAlignment="Center"
                             Checked="RdEncryptor_Checked"
-                            IsChecked="True"
                             Content="ENCRYPTION"
+                            IsChecked="True"
                             Name="rdEncryptor" />
                         <RadioButton
                             Grid.Column="1"
@@ -101,7 +101,11 @@
                     Name="btnGenerateKey"
                     Style="{DynamicResource btnControlSymmetric}" />
                 <!--Open file key-->
-                <Grid Grid.Row="3" Margin="10" Name="keys" IsEnabled="False">
+                <Grid
+                    Grid.Row="3"
+                    Margin="10"
+                    IsEnabled="False"
+                    Name="keys">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="2*" />
                         <ColumnDefinition Width="8*" />
@@ -122,8 +126,8 @@
                     <Button
                         Grid.Column="2"
                         Margin="5 0 "
-                        Content="CHOOSE"
                         Click="BtnKeys_Click"
+                        Content="CHOOSE"
                         Name="btnKeys"
                         Style="{DynamicResource btnControlSymmetric}" />
                 </Grid>
@@ -131,8 +135,8 @@
                 <Button
                     Grid.Row="4"
                     Margin="10"
-                    Content="ENCRYPTION"
                     Click="BtnEncryOrDecry_Click_1"
+                    Content="ENCRYPTION"
                     Name="btnEncryOrDecry"
                     Style="{DynamicResource btnControlSymmetric}" />
             </Grid>
