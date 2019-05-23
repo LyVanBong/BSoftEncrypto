@@ -10,12 +10,14 @@ namespace BSoftEncryptor.ViewModels
         public string filePath { get; set; }
         public string pass { get; set; }
         private SymmetricAlgorithm[] symmetricAlgorithms = { new AesCryptoServiceProvider(), new DESCryptoServiceProvider(), new RC2CryptoServiceProvider(), new TripleDESCryptoServiceProvider() };
+
         public SymmetricAlgorithms(string filePath, string pass)
         {
             this.filePath = filePath;
             this.pass = pass;
         }
 
+        #region mã hóa
         public void EncryptSymmetric(int i)
         {
             byte[] encryptoData;
@@ -52,7 +54,9 @@ namespace BSoftEncryptor.ViewModels
                 File.WriteAllBytes(filePath2 + "\\Encode_" + fileName + extentions, encryptoData);
             }
         }
+        #endregion
 
+        #region giải mã
         public void DecryptSymmetric(int i)
         {
             string decryptoData;
@@ -89,10 +93,16 @@ namespace BSoftEncryptor.ViewModels
                 }
             }
         }
+        #endregion
+
+        #region đọc file
         public byte[] GetByteFile()
         {
             return File.ReadAllBytes(filePath);
         }
+        #endregion
+
+        #region tạo khóa bi mật
         public byte[] GetKeys(int size)
         {
             byte[] keys = new byte[size];
@@ -105,7 +115,9 @@ namespace BSoftEncryptor.ViewModels
                 keys[j] = hashKeys[i];
             return keys;
         }
+        #endregion
 
+        #region tạo vector khởi tạo
         public byte[] GetIVs(int size)
         {
             byte[] ivs = new byte[size];
@@ -118,14 +130,18 @@ namespace BSoftEncryptor.ViewModels
                 ivs[j] = hashIVs[i];
             return ivs;
         }
+        #endregion
 
+        #region dảo ngược mật khẩu
         public string ReverseString(string s)
         {
             char[] arrays = s.ToCharArray();
             Array.Reverse(arrays);
             return new string(arrays);
         }
+        #endregion
 
+        #region tạo mật khẩu
         public static string CreateRandomPassword(int length = 15)
         {
             // Create a string of characters, numbers, special characters that allowed in the password  
@@ -141,5 +157,6 @@ namespace BSoftEncryptor.ViewModels
             }
             return new string(chars);
         }
+        #endregion
     }
 }

@@ -15,6 +15,7 @@ namespace BSoftEncryptor.Class
             FilePath = path;
         }
 
+        #region hàm băm
         public string gethashcodes(int i)
         {
             //khởi tạo các thuật toán băm dưỡi dạng mảng
@@ -32,7 +33,9 @@ namespace BSoftEncryptor.Class
             }
             return sBuilder.ToString();
         }
+        #endregion
 
+        #region đọc file
         public byte[] GetBytes()
         {
             FileStream fs = new FileStream(FilePath, FileMode.Open, FileAccess.Read);
@@ -44,8 +47,9 @@ namespace BSoftEncryptor.Class
             fs.Close();
             return bytes;
         }
+        #endregion
 
-        //veryfy hash
+        #region xác thực hash code
         public bool VeryfyHash(string hashData, string hash)
         {
             //chuyển 2 chuối cần so sanh thành kỹ tự viết hoa rồi đem so sánh
@@ -53,5 +57,6 @@ namespace BSoftEncryptor.Class
                 return true;
             return false;
         }
+        #endregion
     }
 }

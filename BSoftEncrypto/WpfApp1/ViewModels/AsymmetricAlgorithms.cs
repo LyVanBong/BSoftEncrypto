@@ -12,6 +12,7 @@ namespace BSoftEncryptor.ViewModels
             this.filePath = filePath;
         }
 
+        #region tạo khóa bí mật mà khóa công khai lưu ra file
         public string AssignNewKey(string filePathKey)
         {
             FileInfo fileInfo = new FileInfo(filePath);
@@ -30,7 +31,9 @@ namespace BSoftEncryptor.ViewModels
             }
             return filePathPublicKey;
         }
+        #endregion
 
+        #region mã hóa
         public void EncryptData(string publicKeyPath)
         {
 
@@ -46,7 +49,9 @@ namespace BSoftEncryptor.ViewModels
             FileInfo fileInfo = new FileInfo(filePath);
             File.WriteAllBytes(fileInfo.Directory + "\\" + fileInfo.Name + ".EncryptData" + fileInfo.Extension, cipherbytes);
         }
+        #endregion
 
+        #region giải mã
         public void DecryptData(string privateKeyPath)
         {
             byte[] dataToEncrypt = File.ReadAllBytes(filePath);
@@ -60,6 +65,6 @@ namespace BSoftEncryptor.ViewModels
             FileInfo fileInfo = new FileInfo(filePath);
             File.WriteAllBytes(fileInfo.Directory + "\\" + fileInfo.Name + ".DecryptData" + fileInfo.Extension, plain);
         }
-
+        #endregion
     }
 }
