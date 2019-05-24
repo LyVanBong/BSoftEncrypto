@@ -7,8 +7,8 @@ namespace BSoftEncryptor.Class
 {
     public class HashFunction
     {
-        public string FilePath { get; set; }
-        //public string[] hexCodes { get; set; }
+        private string FilePath;
+        private HashAlgorithm[] hashAl = { new MD5CryptoServiceProvider(), new SHA1CryptoServiceProvider(), new SHA256CryptoServiceProvider(), new SHA512CryptoServiceProvider() };
 
         public HashFunction(string path)
         {
@@ -18,34 +18,20 @@ namespace BSoftEncryptor.Class
         #region hàm băm
         public string gethashcodes(int i)
         {
-            //khởi tạo các thuật toán băm dưỡi dạng mảng
-            HashAlgorithm[] hashAl = { new MD5CryptoServiceProvider(), new SHA1CryptoServiceProvider(), new SHA256CryptoServiceProvider(), new SHA512CryptoServiceProvider() };
-
-            //lấy ra mã băm
-            byte[] data = hashAl[i].ComputeHash(GetBytes());
-
+            byte[] hashValue;
+            using (FileStream file = File.OpenRead(FilePath))
+            {
+                hashValue = hashAl[i].ComputeHash(file);
+            }
             StringBuilder sBuilder = new StringBuilder();
 
             //chuyển đổi từ byte sang hex
-            for (int j = 0; j < data.Length; j++)
+            for (int j = 0; j < hashValue.Length; j++)
             {
-                sBuilder.Append(data[j].ToString("x2"));
+                sBuilder.Append(hashValue[j].ToString("x2"));
             }
             return sBuilder.ToString();
-        }
-        #endregion
 
-        #region đọc file
-        public byte[] GetBytes()
-        {
-            FileStream fs = new FileStream(FilePath, FileMode.Open, FileAccess.Read);
-            // Create a byte array of file stream length
-            byte[] bytes = new byte[fs.Length];
-            //Read block of bytes from stream into the byte array
-            fs.Read(bytes, 0, Convert.ToInt32(fs.Length));
-            //Close the File Stream
-            fs.Close();
-            return bytes;
         }
         #endregion
 

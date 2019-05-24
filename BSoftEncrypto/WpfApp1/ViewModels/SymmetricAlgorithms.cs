@@ -17,127 +17,84 @@ namespace BSoftEncryptor.ViewModels
             this.pass = pass;
         }
 
-        #region mã hóa
-        public void EncryptSymmetric(int i)
+        public string FilePath2(string nameFile)
         {
-            byte[] encryptoData;
-
-            string data = Encoding.UTF8.GetString(GetByteFile());
-
-            FileInfo fileInfo = new FileInfo(filePath);
-            string filePath2 = fileInfo.DirectoryName;
-            string extentions = fileInfo.Extension;
-            string fileName = fileInfo.Name;
-            fileName = fileName.Replace(extentions, "");
-
-            //key and iv
-            byte[] keys = GetKeys(symmetricAlgorithms[i].Key.Length);
-            byte[] ivs = GetIVs(symmetricAlgorithms[i].IV.Length);
-
-            //Tạo một bộ mã hóa để thực hiện chuyển đổi luồng.
-            ICryptoTransform transform = symmetricAlgorithms[i].CreateEncryptor(keys, ivs);
-
-            //Tạo các luồng được sử dụng để mã hóa
-            using (MemoryStream memory = new MemoryStream())
+            string fullFilePath2 = "";
+            if (File.Exists(filePath))
             {
-                using (CryptoStream crypto = new CryptoStream(memory, transform, CryptoStreamMode.Write))
-                {
-                    using (StreamWriter writer = new StreamWriter(crypto))
-                    {
-                        //viết tất cả dữ liệu vào luồng
-                        writer.Write(data);
-                    }
-                    encryptoData = memory.ToArray();
-                }
-
-                //ghi dữ liệu đã mã hõa ra file
-                File.WriteAllBytes(filePath2 + "\\Encode_" + fileName + extentions, encryptoData);
+                FileInfo fileInfo = new FileInfo(filePath);
+                fullFilePath2 = fileInfo.Directory + "\\" + nameFile + "_" + fileInfo.Name;
             }
+            return fullFilePath2;
         }
-        #endregion
 
-        #region giải mã
-        public void DecryptSymmetric(int i)
+        #region ma hoa
+        public void EncryptSymmetric(int algorithm)
         {
-            string decryptoData;
-            byte[] plainText;
-            FileInfo fileInfo = new FileInfo(filePath);
-            string filePath2 = fileInfo.DirectoryName;
-            string extentions = fileInfo.Extension;
-            string fileName = fileInfo.Name;
-            fileName = fileName.Replace(extentions, "");
 
-            //key and iv
-            byte[] keys = GetKeys(symmetricAlgorithms[i].Key.Length);
-            byte[] ivs = GetIVs(symmetricAlgorithms[i].IV.Length);
-
-            //Tạo một bộ mã hóa để thực hiện chuyển đổi luồng.
-            ICryptoTransform transform = symmetricAlgorithms[i].CreateDecryptor(keys, ivs);
-
-            //tao luồng để giải mã
-            using (MemoryStream memory = new MemoryStream(GetByteFile()))
+            using (FileStream fileStream = new FileStream(FilePath2("EncryptSymmetric"), FileMode.OpenOrCreate, FileAccess.Write))
             {
-                using (CryptoStream crypto = new CryptoStream(memory, transform, CryptoStreamMode.Read))
+                // thiet lap iv vao luu vao file
+                symmetricAlgorithms[algorithm].GenerateIV();
+                fileStream.Write(symmetricAlgorithms[algorithm].IV, 0, symmetricAlgorithms[algorithm].IV.Length);
+
+                // thiết lập salt cho khóa dẫn suất lưu vào file
+                RandomNumberGenerator numberGenerator = new RNGCryptoServiceProvider();
+                byte[] salt = new byte[symmetricAlgorithms[algorithm].KeySize];
+                numberGenerator.GetBytes(salt);
+                fileStream.Write(salt, 0, salt.Length);
+
+                // tạo khóa từ mật khẩu
+                DeriveBytes deriveBytes = new Rfc2898DeriveBytes(pass, salt, 4096);
+                symmetricAlgorithms[algorithm].Key = deriveBytes.GetBytes(symmetricAlgorithms[algorithm].Key.Length);
+
+                // bắt đầu mã hõa và ghi bản mã ra file
+                byte[] buf = new byte[2048];
+                int count;
+                using (CryptoStream cryptoStream = new CryptoStream(new FileStream(filePath, FileMode.Open, FileAccess.Read), symmetricAlgorithms[algorithm].CreateEncryptor(), CryptoStreamMode.Read))
                 {
-                    using (StreamReader reader = new StreamReader(crypto))
+                    while ((count = cryptoStream.Read(buf, 0, buf.Length)) != 0)
                     {
-                        //đọc các byte được giải mã từ luồng
-                        decryptoData = reader.ReadToEnd();
+                        fileStream.Write(buf, 0, count);
                     }
-                    plainText = Encoding.UTF8.GetBytes(decryptoData);
                 }
-                //ghi dữ liệu được giải mã vào file
-                using (FileStream file = new FileStream(Path.Combine(filePath2 + "\\Decode_" + fileName + extentions), FileMode.OpenOrCreate, FileAccess.Write))
-                {
-                    file.Write(plainText, 0, plainText.Length);
-                }
+
             }
+
+
         }
         #endregion
 
-        #region đọc file
-        public byte[] GetByteFile()
+        #region giai ma
+        public void DecryptSymmetric(int algorithm)
         {
-            return File.ReadAllBytes(filePath);
-        }
-        #endregion
+            using (FileStream fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+            {
+                // doc iv tu file ma hoa
+                byte[] iv = new byte[symmetricAlgorithms[algorithm].IV.Length];
+                fileStream.Read(iv, 0, symmetricAlgorithms[algorithm].IV.Length);
+                symmetricAlgorithms[algorithm].IV = iv;
 
-        #region tạo khóa bi mật
-        public byte[] GetKeys(int size)
-        {
-            byte[] keys = new byte[size];
-            byte[] hashKeys;
-            string pwd = pass + pass.Length;
-            int pwdLen = pass.Length;
-            HashAlgorithm hash = new SHA512CryptoServiceProvider();
-            hashKeys = hash.ComputeHash(Encoding.UTF8.GetBytes(pwd));
-            for (int i = pwdLen, j = 0; i < size + pwdLen; i++, j++)
-                keys[j] = hashKeys[i];
-            return keys;
-        }
-        #endregion
+                // doc salt tu file ma hoa
+                byte[] salt = new byte[symmetricAlgorithms[algorithm].KeySize];
+                fileStream.Read(salt, 0, symmetricAlgorithms[algorithm].KeySize);
 
-        #region tạo vector khởi tạo
-        public byte[] GetIVs(int size)
-        {
-            byte[] ivs = new byte[size];
-            byte[] hashIVs;
-            string psswds = pass + pass.Length;
-            int pwdLen = pass.Length;
-            HashAlgorithm hash = new SHA512CryptoServiceProvider();
-            hashIVs = hash.ComputeHash(Encoding.UTF8.GetBytes(ReverseString(psswds)));
-            for (int i = pwdLen, j = 0; i < pwdLen + size; i++, j++)
-                ivs[j] = hashIVs[i];
-            return ivs;
-        }
-        #endregion
+                // tạo khóa từ mật khẩu
+                DeriveBytes deriveBytes = new Rfc2898DeriveBytes(pass, salt, 4096);
+                symmetricAlgorithms[algorithm].Key = deriveBytes.GetBytes(symmetricAlgorithms[algorithm].Key.Length);
 
-        #region dảo ngược mật khẩu
-        public string ReverseString(string s)
-        {
-            char[] arrays = s.ToCharArray();
-            Array.Reverse(arrays);
-            return new string(arrays);
+                // bắt đầu mã hõa và ghi bản mã ra file
+                byte[] buf = new byte[2048];
+                int count;
+                using (CryptoStream cryptoStream = new CryptoStream(new FileStream(FilePath2("DecryptSymmetric"), FileMode.OpenOrCreate, FileAccess.Write), symmetricAlgorithms[algorithm].CreateDecryptor(), CryptoStreamMode.Write))
+                {
+                    while ((count = fileStream.Read(buf, 0, buf.Length)) != 0)
+                    {
+                        cryptoStream.Write(buf, 0, count);
+                    }
+                }
+
+            }
         }
         #endregion
 
