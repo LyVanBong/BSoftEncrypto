@@ -83,11 +83,22 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ViewModels\AsymmetricAlgorithms.cs" />
+    <Compile Include="ViewModels\DigitalSignatures.cs" />
+    <Compile Include="ViewModels\GenerateKeys.cs" />
     <Compile Include="ViewModels\HashFunctions.cs" />
     <Compile Include="ViewModels\SymmetricAlgorithms.cs" />
     <Compile Include="ViewModels\UcAdd.cs" />
+    <Compile Include="Views\UcAbout.xaml.cs">
+      <DependentUpon>UcAbout.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\UcAsymmetric.xaml.cs">
       <DependentUpon>UcAsymmetric.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UcDigitalSignatures.xaml.cs">
+      <DependentUpon>UcDigitalSignatures.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UcGenerateKeys.xaml.cs">
+      <DependentUpon>UcGenerateKeys.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UcHashFunction.xaml.cs">
       <DependentUpon>UcHashFunction.xaml</DependentUpon>
@@ -107,7 +118,19 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\UcAbout.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\UcAsymmetric.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UcDigitalSignatures.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UcGenerateKeys.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -134,7 +157,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Properties\Licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -217,6 +239,14 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Icon\close_window_52px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\icons8-access-80.png" />
+    <Resource Include="Images\icons8-encrypt-50.png" />
+    <Resource Include="Images\icons8-password-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\signature.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

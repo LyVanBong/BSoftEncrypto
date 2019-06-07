@@ -1,4 +1,5 @@
 ﻿using BSoftEncryptor.UcAlgorithm;
+using BSoftEncryptor.Views;
 using System.Windows;
 using WpfApp1.Class;
 using WpfApp1.UserControl;
@@ -72,6 +73,7 @@ namespace WpfApp1
                 lb_hash.Visibility = Visibility.Hidden;
                 lb_about.Visibility = Visibility.Hidden;
                 lb_setting.Visibility = Visibility.Hidden;
+                lbDigitalSignatures.Visibility = Visibility.Hidden;
                 lbLogo1.Width = 0;
                 imgLogo2.Width = 80;
             }
@@ -85,6 +87,7 @@ namespace WpfApp1
                 lb_hash.Visibility = Visibility.Visible;
                 lb_about.Visibility = Visibility.Visible;
                 lb_setting.Visibility = Visibility.Visible;
+                lbDigitalSignatures.Visibility = Visibility.Visible;
                 lbLogo1.Width = 145;
                 imgLogo2.Width = 100;
                 imgLogo2.Height = 100;
@@ -94,6 +97,21 @@ namespace WpfApp1
         private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
             UcAdd.AddUc(content_bcryptor, new UcSymmetric());
+        }
+
+        private void GenerateKey_Click(object sender, RoutedEventArgs e)
+        {
+            UcAdd.AddUc(content_bcryptor, new UcGenerateKeys());
+        }
+
+        private void BtnSignatures_Click(object sender, RoutedEventArgs e)
+        {
+            UcAdd.AddUc(content_bcryptor, new UcDigitalSignatures());
+        }
+
+        private void BtnAbout_Click(object sender, RoutedEventArgs e)
+        {
+            UcAdd.AddUc(content_bcryptor, new UcAbout());
         }
     }
 }

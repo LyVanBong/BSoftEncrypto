@@ -11,28 +11,6 @@ namespace BSoftEncryptor.ViewModels
         {
             this.filePath = filePath;
         }
-
-        #region tạo khóa bí mật mà khóa công khai lưu ra file
-        public string AssignNewKey(string filePathKey)
-        {
-            FileInfo fileInfo = new FileInfo(filePath);
-            string publicKey;
-            string privateKey;
-            string filePathPublicKey = $"{filePathKey}\\{fileInfo.Name}.PublicKey.xml";
-            string filePathPrivateKey = $"{filePathKey}\\{fileInfo.Name}.PrivateKey.xml";
-
-            using (var rsa = new RSACryptoServiceProvider(4096))
-            {
-                rsa.PersistKeyInCsp = false;
-                publicKey = rsa.ToXmlString(false);
-                File.WriteAllText(filePathPublicKey, publicKey);
-                privateKey = rsa.ToXmlString(true);
-                File.WriteAllText(filePathPrivateKey, privateKey);
-            }
-            return filePathPublicKey;
-        }
-        #endregion
-
         #region mã hóa
         public void EncryptData(string publicKeyPath)
         {

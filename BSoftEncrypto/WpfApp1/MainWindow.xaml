@@ -130,11 +130,11 @@
                 <!--symmetric algorithm-->
                 <Button
                     x:Name="symmetric"
+                    Margin="0 10 0 10"
                     Click="Symmetric_Click"
-                    Padding="0 0 0 10"
                     Style="{DynamicResource styleControls}">
                     <DockPanel Width="210" Margin="10 0 0 0">
-                        <Image Width="32" Source="Images/Icon/secret.png" />
+                        <Image Width="32" Source="Images/icons8-encrypt-50.png" />
                         <Label
                             x:Name="lb_secret"
                             Content="Secret Key Encryption"
@@ -145,10 +145,11 @@
                 <!--asymmetric algorithm-->
                 <Button
                     x:Name="asymmetric"
+                    Margin="0 10 0 10"
                     Click="Asymmetric_Click"
                     Style="{DynamicResource styleControls}">
                     <DockPanel Width="200" Margin="10 0 0 0">
-                        <Image Width="32" Source="Images/key_32px.png" />
+                        <Image Width="32" Source="Images/icons8-password-64.png" />
                         <Label
                             x:Name="lb_public"
                             Content="Public Key Encryption"
@@ -159,6 +160,7 @@
                 <!--hash algorithm-->
                 <Button
                     x:Name="hashFunc"
+                    Margin="0 10 0 10"
                     Click="HashFunc_Click"
                     Style="{DynamicResource styleControls}">
                     <DockPanel Width="200" Margin="10 0 0 0">
@@ -170,18 +172,42 @@
                             Foreground="White" />
                     </DockPanel>
                 </Button>
-                <Button Style="{DynamicResource styleControls}">
+                <!--generate key-->
+                <Button
+                    x:Name="generateKey"
+                    Margin="0 10 0 10"
+                    Click="GenerateKey_Click"
+                    Style="{DynamicResource styleControls}">
                     <DockPanel Width="200" Margin="10 0 0 0">
-                        <Image Width="32" Source="Images/Icon/setting.png" />
+                        <Image Width="32" Source="Images/icons8-access-80.png" />
                         <Label
                             x:Name="lb_setting"
-                            Content="Setting"
+                            Content="Generate Key"
+                            FontSize="16"
+                            Foreground="White" />
+                    </DockPanel>
+                </Button>
+                <!--Digital Signatures-->
+                <Button
+                    Margin="0 10 0 10"
+                    Click="BtnSignatures_Click"
+                    Name="btnSignatures"
+                    Style="{DynamicResource styleControls}">
+                    <DockPanel Width="200" Margin="10 0 0 0">
+                        <Image Width="32" Source="Images/signature.png" />
+                        <Label
+                            x:Name="lbDigitalSignatures"
+                            Content="Digital Signatures"
                             FontSize="16"
                             Foreground="White" />
                     </DockPanel>
                 </Button>
                 <!--about-->
-                <Button Style="{DynamicResource styleControls}">
+                <Button
+                    Margin="0 10 0 10"
+                    Click="BtnAbout_Click"
+                    Name="btnAbout"
+                    Style="{DynamicResource styleControls}">
                     <DockPanel Width="200" Margin="10 0 0 0">
                         <Image Width="32" Source="Images/Icon/about_32px.png" />
                         <Label

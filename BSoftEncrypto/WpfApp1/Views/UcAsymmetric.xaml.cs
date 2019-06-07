@@ -28,48 +28,25 @@ namespace BSoftEncryptor.UcAlgorithm
             {
                 filePath = openFile.FileName;
                 txtFileOpen.Text = filePath;
-                btnGenerateKey.IsEnabled = true;
-                gbFeatures.IsEnabled = true;
+
             }
         }
-        private void BtnGenerateKey_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                string pathKey;
-                rsa = new AsymmetricAlgorithms(filePath);
-
-                var saveFoder = new System.Windows.Forms.FolderBrowserDialog();
-                saveFoder.ShowDialog();
-                pathKey = saveFoder.SelectedPath;
-                txtKeys.Text = rsa.AssignNewKey(pathKey);
-                MessageBox.Show("GENERATE KEY SUCCESS", "SUCCESS", MessageBoxButton.OK, MessageBoxImage.Asterisk);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("GENERATE KEY FAIL: " + ex.Message, "FAIL", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-
         private void RdEncryptor_Checked(object sender, RoutedEventArgs e)
         {
             if (checks > 0)
             {
-                lbTypeKeys.Content = "PUBLIC KEY";
-                btnEncryOrDecry.Content = "ENCRYPTION";
-                btnGenerateKey.IsEnabled = true;
+                publicKeys.IsEnabled = true;
                 keys.IsEnabled = false;
+                txtKeys.Clear();
                 checks++;
             }
         }
 
         private void RdDecryptor_Checked(object sender, RoutedEventArgs e)
         {
-            lbTypeKeys.Content = "PRIVATE KEY";
-            btnEncryOrDecry.Content = "DECRYPTION";
-            btnGenerateKey.IsEnabled = false;
             keys.IsEnabled = true;
-            txtKeys.Clear();
+            publicKeys.IsEnabled = false;
+            txtPublicKey.Clear();
             checks++;
         }
 
@@ -88,7 +65,7 @@ namespace BSoftEncryptor.UcAlgorithm
             {
                 try
                 {
-                    string a = txtKeys.Text;
+                    string a = txtPublicKey.Text;
                     string b = txtFileOpen.Text;
                     rsa = new AsymmetricAlgorithms(b);
                     rsa.EncryptData(a);
@@ -116,6 +93,15 @@ namespace BSoftEncryptor.UcAlgorithm
                 {
                     MessageBox.Show("DECRYPTOR FAIL: " + ex.Message, "FAIL", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
+            }
+        }
+
+        private void BtnPubKey_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() == true)
+            {
+                txtPublicKey.Text = openFileDialog.FileName;
             }
         }
     }

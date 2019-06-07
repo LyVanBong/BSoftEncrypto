@@ -1,0 +1,101 @@
+﻿<UserControl
+    x:Class="BSoftEncryptor.Views.UcGenerateKeys"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:BSoftEncryptor.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    MinWidth="680"
+    MinHeight="430"
+    mc:Ignorable="d"
+    Background="White"
+    d:DesignHeight="430"
+    d:DesignWidth="680"
+    Foreground="Black">
+
+    <Grid>
+        <GroupBox
+            Margin="10 0 10 10"
+            Padding="10"
+            BorderBrush="#FF4A4E61"
+            BorderThickness="2"
+            FontSize="16"
+            FontWeight="Bold"
+            Foreground="Black">
+            <GroupBox.Header>GENERATE KEY</GroupBox.Header>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="3*" />
+                        </Grid.ColumnDefinitions>
+                        <Label
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Content="PUBLIC KEY" />
+                        <TextBox
+                            x:Name="txtPublicKey"
+                            Grid.Column="1"
+                            FontWeight="Normal"
+                            Margin="0 0 0 5"
+                            IsReadOnly="True"
+                            TextWrapping="Wrap" />
+                    </Grid>
+                </Border>
+                <Border Grid.Row="1">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="3*" />
+                        </Grid.ColumnDefinitions>
+                        <Label
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Content="PRIVATE KEY" />
+                        <TextBox
+                            x:Name="txtPrivateKey"
+                            Grid.Column="1"
+                            FontWeight="Normal"
+                            Margin="0 5 0 0"
+                            
+                            IsReadOnly="True"
+                            TextWrapping="Wrap" />
+                    </Grid>
+                </Border>
+                <Border Grid.Row="2">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Button
+                            Grid.Column="1"
+                            Margin="10"
+                            Click="BtnGenerateKey_Click"
+                            Content="GENERATE KEY"
+                            Name="btnGenerateKey"
+                            Style="{DynamicResource btnControlHash}" />
+                        <Button
+                            Grid.Column="3"
+                            Margin="10"
+                            Click="BtnSave_Click"
+                            Content="SAVE"
+                            Name="btnSave"
+                            Style="{DynamicResource btnControlHash}" />
+                    </Grid>
+                </Border>
+            </Grid>
+        </GroupBox>
+    </Grid>
+
+</UserControl>
+
