@@ -15,8 +15,8 @@ Lớp: AT11B
 
 ## Chức năng chính gồm 3 phần
 ### SymmetricAlgorithm
-![BSoftCryptor](https://github.com/hopegroup/MyGraduationProject/blob/master/Image/uisymmetrialgorithm.jpg)
+![BSoftCryptor](https://github.com/LyVanBong/BSoftEncrypto/blob/master/Image/uisymmetrialgorithm.jpg)
 ### AsymmetricAlgorithm
-![BSoftCryptor](https://github.com/hopegroup/MyGraduationProject/blob/master/Image/asymmetricalgorithm.jpg)
+![BSoftCryptor](https://github.com/LyVanBong/BSoftEncrypto/blob/master/Image/asymmetricalgorithm.jpg)
 ### HashAlgorithm
-![BSoftCryptor](https://github.com/hopegroup/MyGraduationProject/blob/master/Image/uihashalgorithm.jpg)
+![BSoftCryptor](https://github.com/LyVanBong/BSoftEncrypto/blob/master/Image/uihashalgorithm.jpg)
