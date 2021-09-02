@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows;
 using System.Security.Cryptography;
 
 namespace BSoftEncryptor.ViewModels
@@ -29,20 +26,19 @@ namespace BSoftEncryptor.ViewModels
             return sign;
         }
 
-        public bool VerifyByRSA(string filedata, string priveteKey, string fileCer)
+        public bool VerifyByRSA(string filePathData, string filePathKey, string filePathCer)
         {
             bool verify = false;
             byte[] hashData;
-            byte[] cer = File.ReadAllBytes(fileCer);
+            byte[] cer = File.ReadAllBytes(filePathCer);
             using (SHA512Cng shaCng = new SHA512Cng())
             {
-                hashData = shaCng.ComputeHash(File.ReadAllBytes(filedata));
+                hashData = shaCng.ComputeHash(File.ReadAllBytes(filePathData));
             }
-
             using (RSACryptoServiceProvider rsa = new RSACryptoServiceProvider())
             {
                 rsa.PersistKeyInCsp = false;
-                rsa.FromXmlString(File.ReadAllText(priveteKey));
+                rsa.FromXmlString(File.ReadAllText(filePathKey));
                 RSAPKCS1SignatureDeformatter signatureDeformatter = new RSAPKCS1SignatureDeformatter(rsa);
                 signatureDeformatter.SetHashAlgorithm("SHA512");
                 verify = signatureDeformatter.VerifySignature(hashData, cer);
@@ -53,11 +49,19 @@ namespace BSoftEncryptor.ViewModels
 
         public void SaveSign(string filePathCer, byte[] data, string filePathData)
         {
-            FileInfo fileInfo = new FileInfo(filePathData);
-            string nameFile = (fileInfo.Name).Replace(fileInfo.Extension, "");
-            FileStream fileStream = new FileStream($"{filePathCer}\\{nameFile}.RSA.bsign", FileMode.OpenOrCreate, FileAccess.Write);
-            fileStream.Write(data, 0, data.Length);
-            fileStream.Close();
+            try
+            {
+                FileInfo fileInfo = new FileInfo(filePathData);
+                string nameFile = (fileInfo.Name).Replace(fileInfo.Extension, "");
+                FileStream fileStream = new FileStream($"{filePathCer}\\{nameFile}.RSA.bsign", FileMode.OpenOrCreate, FileAccess.Write);
+                fileStream.Write(data, 0, data.Length);
+                fileStream.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
         }
 
 

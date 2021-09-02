@@ -115,5 +115,6 @@ namespace BSoftEncryptor.ViewModels
             return new string(chars);
         }
         #endregion
+
     }
 }
